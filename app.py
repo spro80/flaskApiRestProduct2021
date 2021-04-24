@@ -18,7 +18,7 @@ USER_DB = 'fsfaoylpyzrhos'
 PASS_DB = '76e5730bcb1ea339a54979203d2d7ec5e43f587fcdd9f0dd96162c0404a85792'
 URL_DB = 'ec2-34-225-167-77.compute-1.amazonaws.com:5432'
 NAME_DB = 'dfndduigsrotgr'
-FULL_URL_DB = f'postgres://{USER_DB}:{PASS_DB}@{URL_DB}/{NAME_DB}'
+FULL_URL_DB = f'postgresql://{USER_DB}:{PASS_DB}@{URL_DB}/{NAME_DB}'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = FULL_URL_DB
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
