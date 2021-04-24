@@ -1,4 +1,5 @@
 from flask import Flask
+from flask import jsonify
 
 app = Flask(__name__)
 
@@ -10,4 +11,7 @@ def index():
 @app.route('/product/list')
 def products_list():
     print('Init in products_list')
-    return 'Return all products !!!'
+    response = {
+        'status': 'ok'
+    }
+    return jsonify( response )
