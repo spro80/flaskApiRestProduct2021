@@ -59,3 +59,27 @@ def products_list():
         'status': 'ok'
     }
     return jsonify( response )
+
+
+@app.route('/product/view/<int:id>')
+def view_details( id ):
+    print('Init in view_details')
+    # Recuperamos la fila de acuerdo al id consultado.
+    product = Product.query.get( id )
+
+    if product is None:
+        return 'No se han encontrado datos'
+    #app.loger.debug(f'Ver persona: {producto}')
+    response = {
+    'status': 'ok',
+    'code': 200,
+    'description': 'response ok',
+    'data': {
+        'sku':product.sku,
+        'name':product.name,
+        'price':product.price,
+        'brand':product.brand,
+        'stock':product.stock
+    }
+    }
+    return jsonify( response )
