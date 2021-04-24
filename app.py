@@ -13,6 +13,7 @@ def index():
 
 
 
+
 #postgres://fsfaoylpyzrhos:76e5730bcb1ea339a54979203d2d7ec5e43f587fcdd9f0dd96162c0404a85792@ec2-34-225-167-77.compute-1.amazonaws.com:5432/dfndduigsrotgr
 USER_DB = 'fsfaoylpyzrhos'
 PASS_DB = '76e5730bcb1ea339a54979203d2d7ec5e43f587fcdd9f0dd96162c0404a85792'
@@ -68,7 +69,12 @@ def view_details( id ):
     product = Product.query.get( id )
 
     if product is None:
-        return 'No se han encontrado datos'
+        response = {
+            'status': 'ok',
+            'code': 200,
+            'description': 'product not found',        
+        }
+        return jsonify( response )
     #app.loger.debug(f'Ver persona: {producto}')
     response = {
     'status': 'ok',
@@ -89,18 +95,14 @@ def view_details( id ):
 def add():
     if request.method == 'POST':
         data = request.get_json()
-        print(data)
-        #req_id = data["id"]
         req_sku = data["sku"]
         req_name = data["name"]
         req_price = data["price"]
         req_brand = data["brand"]
         req_stock = data["stock"]
-        print(f"req_stock: {req_stock}")
         new_product = Product(sku=req_sku, name=req_name, price=req_price, brand=req_brand, stock=req_stock )
         db.session.add(new_product)
         db.session.commit()
-        print("add new row")
         response = {
             'status': 'ok',
             'code': 200,
@@ -130,9 +132,7 @@ def delete_product():
 def edit_product():
     data = request.get_json()
     product_id = data["id"]
-    print(f'product_id: {product_id}')
     if request.method == 'POST':
-        print(data["sku"])
         x = db.session.query(Product).get( product_id )
         x.sku = data["sku"]
         x.name = data["name"]
