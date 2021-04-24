@@ -51,11 +51,7 @@ class Product(db.Model):
         )
 
 
-@app.route('/product/list')
-def products_list():
-    product = Product.query.all()
-    total_products = Product.query.count()
-
+def create_structure_product_list(product):
     product_list = []
     product_dict = {}
     for count,ele in enumerate(product,0):
@@ -68,21 +64,30 @@ def products_list():
             "stock":ele.stock,
         }
         product_list.append(product_dict)
+    return product_list
+
+
+
+@app.route('/product/list')
+def products_list():
+    product = Product.query.all()
+    total_products = Product.query.count()
+
+    prod_list = []
+    prod_list = create_structure_product_list(product) 
     
     response = {
         'status': 'ok',
         'code': 200,
-        'data': product_list
+        'data': prod_list
     }
     return jsonify( response )
 
 
+
 @app.route('/product/view/<int:id>')
 def view_details( id ):
-    print('Init in view_details')
-    # Recuperamos la fila de acuerdo al id consultado.
     product = Product.query.get( id )
-
     if product is None:
         response = {
             'status': 'ok',
@@ -90,7 +95,7 @@ def view_details( id ):
             'description': 'product not found',        
         }
         return jsonify( response )
-    #app.loger.debug(f'Ver persona: {producto}')
+    #app.loger.debug(f'view product: {producto}')
     response = {
     'status': 'ok',
     'code': 200,
@@ -104,6 +109,7 @@ def view_details( id ):
     }
     }
     return jsonify( response )
+
 
 
 @app.route('/product/add', methods=['GET', 'POST'])
@@ -126,6 +132,7 @@ def add():
         return jsonify( response )
 
 
+
 @app.route('/product/delete', methods=['GET', 'POST'])
 def delete_product():
     if request.method == 'POST':
@@ -141,6 +148,7 @@ def delete_product():
             'description': 'The product was deleted correctly',
         }
         return jsonify( response )
+
 
 
 @app.route('/product/edit', methods=['GET', 'POST'])
