@@ -3,9 +3,10 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask import jsonify
 
+app = Flask(__name__)
+
 
 #postgres://fsfaoylpyzrhos:76e5730bcb1ea339a54979203d2d7ec5e43f587fcdd9f0dd96162c0404a85792@ec2-34-225-167-77.compute-1.amazonaws.com:5432/dfndduigsrotgr
-
 USER_DB = 'fsfaoylpyzrhos'
 PASS_DB = '76e5730bcb1ea339a54979203d2d7ec5e43f587fcdd9f0dd96162c0404a85792'
 URL_DB = 'ec2-34-225-167-77.compute-1.amazonaws.com:5432'
@@ -23,10 +24,6 @@ migrate = Migrate()
 migrate.init_app(app, db)
 
 
-
-
-
-app = Flask(__name__)
 
 @app.route("/")
 def index():
