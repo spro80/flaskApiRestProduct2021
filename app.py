@@ -123,3 +123,24 @@ def delete_product():
         }
         return jsonify( response )
 
+
+@app.route('/product/edit', methods=['GET', 'POST'])
+def edit_product():
+    data = request.get_json()
+    product_id = data["id"]
+    print(f'product_id: {product_id}')
+    if request.method == 'POST':
+        print(data["sku"])
+        x = db.session.query(Product).get( product_id )
+        x.sku = data["sku"]
+        x.name = data["name"]
+        x.price = data["price"]
+        x.brand = data["brand"]
+        x.stock = data["stock"]
+        db.session.commit()
+        response = {
+            'status': 'ok',
+            'code': 200,
+            'description': 'The product was edited correctly',
+        }
+        return jsonify( response )
