@@ -94,8 +94,10 @@ def add():
         req_sku = data["sku"]
         req_name = data["name"]
         req_price = data["price"]
+        req_brand = data["brand"]
         req_stock = data["stock"]
-        new_product = Product(sku=req_sku, name=req_name, price=req_price, brand=req_stock)
+        print(f"req_stock: {req_stock}")
+        new_product = Product(sku=req_sku, name=req_name, price=req_price, brand=req_brand, stock=req_stock )
         db.session.add(new_product)
         db.session.commit()
         print("add new row")
