@@ -83,3 +83,26 @@ def view_details( id ):
     }
     }
     return jsonify( response )
+
+
+@app.route('/product/add', methods=['GET', 'POST'])
+def add():
+    if request.method == 'POST':
+        data = request.get_json()
+        print(data)
+        #req_id = data["id"]
+        req_sku = data["sku"]
+        req_name = data["name"]
+        req_price = data["price"]
+        req_stock = data["stock"]
+        new_product = Product(sku=req_sku, name=req_name, price=req_price, brand=req_stock)
+        db.session.add(new_product)
+        db.session.commit()
+        print("add new row")
+        response = {
+            'status': 'ok',
+            'code': 200,
+            'description': 'add product is ok',
+        }
+        return jsonify( response )
+
