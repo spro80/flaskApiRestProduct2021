@@ -106,3 +106,20 @@ def add():
         }
         return jsonify( response )
 
+
+@app.route('/product/delete', methods=['GET', 'POST'])
+def delete_product():
+    if request.method == 'POST':
+        data = request.get_json()
+        print(data)
+        delete_product_id = data["id"]
+        x = db.session.query(Product).get( delete_product_id )
+        db.session.delete(x)
+        db.session.commit()
+        response = {
+            'status': 'ok',
+            'code': 200,
+            'description': 'The product was deleted correctly',
+        }
+        return jsonify( response )
+
