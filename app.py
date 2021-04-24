@@ -51,13 +51,28 @@ class Product(db.Model):
         )
 
 
-
-
 @app.route('/product/list')
 def products_list():
-    print('Init in products_list')
+    product = Product.query.all()
+    total_products = Product.query.count()
+
+    product_list = []
+    product_dict = {}
+    for count,ele in enumerate(product,0):
+        product_dict = {
+            "id":ele.id,
+            "sku":ele.sku,
+            "name":ele.name,
+            "price":ele.price,
+            "brand":ele.brand,
+            "stock":ele.stock,
+        }
+        product_list.append(product_dict)
+    
     response = {
-        'status': 'ok'
+        'status': 'ok',
+        'code': 200,
+        'data': product_list
     }
     return jsonify( response )
 
