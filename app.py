@@ -2,9 +2,10 @@ from flask import Flask, request
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask import jsonify
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-
+CORS(app, support_credentials=True)
 
 
 @app.route("/")
@@ -69,6 +70,7 @@ def create_structure_product_list(product):
 
 
 @app.route('/product/list')
+@cross_origin(supports_credentials=True)
 def products_list():
     product = Product.query.all()
     total_products = Product.query.count()
