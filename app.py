@@ -133,6 +133,7 @@ def add():
             'code': 200,
             'description': 'add product is ok',
         }
+        response.headers.add("Access-Control-Allow-Origin", "*")
         return jsonify( response )
 
 
