@@ -88,6 +88,7 @@ def products_list():
 
 
 @app.route('/product/view/<int:id>')
+@cross_origin(supports_credentials=True)
 def view_details( id ):
     product = Product.query.get( id )
     if product is None:
@@ -115,6 +116,7 @@ def view_details( id ):
 
 
 @app.route('/product/add', methods=['GET', 'POST'])
+@cross_origin(supports_credentials=True)
 def add():
     if request.method == 'POST':
         data = request.get_json()
@@ -136,6 +138,7 @@ def add():
 
 
 @app.route('/product/delete', methods=['GET', 'POST'])
+@cross_origin(supports_credentials=True)
 def delete_product():
     if request.method == 'POST':
         data = request.get_json()
@@ -154,6 +157,7 @@ def delete_product():
 
 
 @app.route('/product/edit', methods=['GET', 'POST'])
+@cross_origin(supports_credentials=True)
 def edit_product():
     data = request.get_json()
     product_id = data["id"]
