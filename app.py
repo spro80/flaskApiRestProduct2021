@@ -137,7 +137,7 @@ def add():
         return jsonify( response )
 
 
-
+'''
 @app.route('/product/delete', methods=['GET', 'POST'])
 @cross_origin(supports_credentials=True)
 def delete_product():
@@ -154,7 +154,33 @@ def delete_product():
             'description': 'The product was deleted correctly',
         }
         return jsonify( response )
+'''
 
+@app.route('/product/delete/<int:id>', methods=['DELETE'])
+@cross_origin(supports_credentials=True)
+def delete_product2(id):
+    print("init in DELETE 2")
+    if request.method == 'DELETE':
+        print("init in DELETE 2 in POST---")
+        product = Product.query.get( id )
+        if product is None:
+            response = {
+                'status': 'ok',
+                'code': 200,
+                'description': 'The product is not exist in Database',        
+            }
+            return jsonify( response )
+        print(id)
+        delete_product_id = id
+        x = db.session.query(Product).get( delete_product_id )
+        db.session.delete(x)
+        db.session.commit()
+        response = {
+            'status': 'ok',
+            'code': 200,
+            'description': 'The product was deleted correctly',
+        }
+        return jsonify( response )
 
 
 @app.route('/product/edit', methods=['GET', 'POST'])
