@@ -4,15 +4,17 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import jsonify
 from flask_cors import CORS, cross_origin
 
+from flasgger import Swagger
+from database import db
+from models import Product
+
 app = Flask(__name__)
 CORS(app, support_credentials=True)
-
+swagger = Swagger(app)
 
 @app.route("/")
 def index():
     return "Healtcheck Get in /"
-
-
 
 
 #postgres://fsfaoylpyzrhos:76e5730bcb1ea339a54979203d2d7ec5e43f587fcdd9f0dd96162c0404a85792@ec2-34-225-167-77.compute-1.amazonaws.com:5432/dfndduigsrotgr
@@ -26,30 +28,13 @@ app.config['SQLALCHEMY_DATABASE_URI'] = FULL_URL_DB
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Inicializacion del objeto db de sqlalchemy
-db = SQLAlchemy(app)
+#db = SQLAlchemy(app)
+db.init_app(app)
 
 #Configurar flask-migrate
 migrate = Migrate()
 migrate.init_app(app, db)
 
-
-class Product(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    sku = db.Column(db.String(250))
-    name = db.Column(db.String(250))
-    price = db.Column(db.Integer)
-    brand = db.Column(db.String(250))
-    stock = db.Column(db.Integer)
-
-    def __str__(self):
-        return(
-            f'Id: {self.id, }'
-            f'sku: {self.sku, }'
-            f'name: {self.name, }'
-            f'price: {self.price, }'
-            f'brand: {self.brand, }'
-            f'stock: {self.stock}'
-        )
 
 
 def create_structure_product_list(product):
@@ -72,6 +57,22 @@ def create_structure_product_list(product):
 @app.route('/product/list')
 @cross_origin(supports_credentials=True)
 def products_list():
+    """
+    Example endpoint returning a list of products
+    This is using docstrings for specifications.
+    ---
+    parameters:
+      - name: palette
+        in: path
+        type: string
+        enum: ['all', 'rgb', 'cmyk']
+        required: true
+        default: all
+    responses:
+      200:
+        code: 200,
+        description: { a: 1, b: 2}
+    """
     product = Product.query.all()
     total_products = Product.query.count()
 
