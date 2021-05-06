@@ -58,20 +58,13 @@ def create_structure_product_list(product):
 @cross_origin(supports_credentials=True)
 def products_list():
     """
-    Example endpoint returning a list of products
+    Endpoint returning a list of products.
     This is using docstrings for specifications.
     ---
-    parameters:
-      - name: palette
-        in: path
-        type: string
-        enum: ['all', 'rgb', 'cmyk']
-        required: true
-        default: all
     responses:
       200:
         code: 200,
-        description: { a: 1, b: 2}
+        description: description
     """
     product = Product.query.all()
     total_products = Product.query.count()
@@ -91,6 +84,15 @@ def products_list():
 @app.route('/product/view/<int:id>')
 @cross_origin(supports_credentials=True)
 def view_details( id ):
+    """
+    Endpoint returning details of product by id.
+    This is using docstrings for specifications.
+    ---
+    responses:
+      200:
+        code: 200,
+        description: description
+    """
     product = Product.query.get( id )
     if product is None:
         response = {
@@ -116,9 +118,18 @@ def view_details( id ):
 
 
 
-@app.route('/product/add', methods=['GET', 'POST'])
+@app.route('/product/add', methods=['POST'])
 @cross_origin(supports_credentials=True)
 def add():
+    """
+    Endpoint add product.
+    This is using docstrings for specifications.
+    ---
+    responses:
+      200:
+        code: 200,
+        description: description
+    """
     if request.method == 'POST':
         data = request.get_json()
         req_sku = data["sku"]
@@ -140,6 +151,15 @@ def add():
 @app.route('/product/delete/<int:id>', methods=['DELETE'])
 @cross_origin(supports_credentials=True)
 def delete_product(id):
+    """
+    Endpoint delete product by id.
+    This is using docstrings for specifications.
+    ---
+    responses:
+      200:
+        code: 200,
+        description: description
+    """
     if request.method == 'DELETE':
         product = Product.query.get( id )
         if product is None:
@@ -161,9 +181,18 @@ def delete_product(id):
         return jsonify( response )
 
 
-@app.route('/product/edit', methods=['GET', 'POST'])
+@app.route('/product/edit', methods=['POST'])
 @cross_origin(supports_credentials=True)
 def edit_product():
+    """
+    Endpoint edit data of product by id.
+    This is using docstrings for specifications.
+    ---
+    responses:
+      200:
+        code: 200,
+        description: description
+    """
     data = request.get_json()
     product_id = data["id"]
     if request.method == 'POST':
