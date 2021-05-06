@@ -1,0 +1,151 @@
+{
+	"variables": [],
+	"info": {
+		"name": "PythonFlaskProductos in Heroku",
+		"_postman_id": "06cbe2a3-489c-25c1-79c5-0bd48a6e470f",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Healtcheck Api Productos",
+			"request": {
+				"url": "https://flask-api-rest-product-2021.herokuapp.com/",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": \"2\",\n\t\"sku\": \"00001111444\",\n\t\"name\": \"notebookcuatro\",\n\t\"price\": 7000444,\n\t\"brand\": \"marca nueva cuatro\",\n\t\"stock\": 1004\n}"
+				},
+				"description": "Test of Health Check in url local"
+			},
+			"response": []
+		},
+		{
+			"name": "API Product Lists",
+			"request": {
+				"url": "https://flask-api-rest-product-2021.herokuapp.com/product/list",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": \"2\",\n\t\"sku\": \"00001111444\",\n\t\"name\": \"notebookcuatro\",\n\t\"price\": 7000444,\n\t\"brand\": \"marca nueva cuatro\",\n\t\"stock\": 1004\n}"
+				},
+				"description": "Get all products of database"
+			},
+			"response": []
+		},
+		{
+			"name": "API View Product by ID",
+			"request": {
+				"url": "https://flask-api-rest-product-2021.herokuapp.com/product/view/1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": \"2\",\n\t\"sku\": \"00001111444\",\n\t\"name\": \"notebookcuatro\",\n\t\"price\": 7000444,\n\t\"brand\": \"marca nueva cuatro\",\n\t\"stock\": 1004\n}"
+				},
+				"description": "View Details of Product by ID"
+			},
+			"response": []
+		},
+		{
+			"name": "API Edit Product",
+			"request": {
+				"url": "http://127.0.0.1:5000/edit",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": \"2\",\n\t\"sku\": \"00001111444\",\n\t\"name\": \"notebookcuatro\",\n\t\"price\": 7000444,\n\t\"brand\": \"marca nueva cuatro\",\n\t\"stock\": 1004\n}"
+				},
+				"description": "Edait data of Product with ID"
+			},
+			"response": []
+		},
+		{
+			"name": "API Add Product",
+			"request": {
+				"url": "https://flask-api-rest-product-2021.herokuapp.com/product/add",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"sku\": \"00001111444\",\n\t\"name\": \"notebookcuatro\",\n\t\"price\": 7000444,\n\t\"brand\": \"marca nueva cuatro\",\n\t\"stock\": 1004\n}"
+				},
+				"description": "Add new Product in database"
+			},
+			"response": []
+		},
+		{
+			"name": "API Delete Product deprecado",
+			"request": {
+				"url": "https://flask-api-rest-product-2021.herokuapp.com/product/delete",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": \"1\"\n}"
+				},
+				"description": "Delete Product in database"
+			},
+			"response": []
+		},
+		{
+			"name": "API Delete Product",
+			"request": {
+				"url": "https://flask-api-rest-product-2021.herokuapp.com/product/delete",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": \"1\"\n}"
+				},
+				"description": "Delete Product in database"
+			},
+			"response": []
+		}
+	]
+}
