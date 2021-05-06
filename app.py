@@ -64,7 +64,7 @@ def products_list():
     responses:
       200:
         code: 200,
-        description: description
+        description: A list of products
     """
     product = Product.query.all()
     total_products = Product.query.count()
@@ -88,10 +88,15 @@ def view_details( id ):
     Endpoint returning details of product by id.
     This is using docstrings for specifications.
     ---
+    parameters:
+      - name: id
+        in: path
+        type: int
+        required: true
     responses:
       200:
         code: 200,
-        description: description
+        description: All data of product by id
     """
     product = Product.query.get( id )
     if product is None:
@@ -128,7 +133,7 @@ def add():
     responses:
       200:
         code: 200,
-        description: description
+        description: Add product in database
     """
     if request.method == 'POST':
         data = request.get_json()
@@ -155,10 +160,15 @@ def delete_product(id):
     Endpoint delete product by id.
     This is using docstrings for specifications.
     ---
+    parameters:
+      - name: id
+        in: path
+        type: int
+        required: true
     responses:
       200:
         code: 200,
-        description: description
+        description: Delete product by id
     """
     if request.method == 'DELETE':
         product = Product.query.get( id )
@@ -191,7 +201,7 @@ def edit_product():
     responses:
       200:
         code: 200,
-        description: description
+        description: Edit product by id
     """
     data = request.get_json()
     product_id = data["id"]
